@@ -1,9 +1,16 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchNotes } from "../store/notesSlice.js";
 import NoteForm from "../components/NoteForm.jsx";
 import NoteItem from "../components/NoteItem.jsx";
 
 function Dashboard() {
+  const dispatch = useDispatch();
   const { items, loading, error } = useSelector((state) => state.notes);
+
+  useEffect(() => {
+    dispatch(fetchNotes());
+  }, [dispatch]);
 
   return (
     <div>
