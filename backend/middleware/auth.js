@@ -12,7 +12,7 @@ const protect = (req, res, next) => {
   const token = authHeader.split(" ")[1];
 
   // Read the user id stored inside the token
-  const decoded = jwt.decode(token);
+  const decoded = jwt.verify(token,process.env.JWT_SECRET);
 
   if (!decoded) {
     return res.status(401).json({ message: "Not authorized, invalid token" });
